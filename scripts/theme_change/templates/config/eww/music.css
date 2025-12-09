@@ -1,0 +1,52 @@
+.music {
+  background: alpha(@background, 1);
+
+  border: 2px solid @foreground;
+
+  padding: 0 0 0 18px;
+  margin: 0;
+}
+.progress-bar trough{
+  min-width: 200px;
+  min-height: 5px;
+  
+  background: @foreground;
+  
+  border: none;
+  border-radius: 20px;
+}
+.progress-bar highlight {
+  min-height: 5px;
+
+  background: @accent;
+
+  border: none;
+}
+.progress-bar slider {
+  min-height: 0;
+  min-width: 0;
+  background: none;
+  border: none;
+}
+.volume-bar trough{
+  min-width: 80px;
+  min-height: 5px;
+
+  background: @foreground;
+
+  border: none;
+  border-radius: 20px;
+}
+.volume-bar highlight {
+  min-height: 5px;
+
+  background: @accent;
+  
+  border: none;
+}
+.volume-bar slider{
+  min-height: 0;
+  min-width: 0;
+  background: none;
+  border: none;
+}

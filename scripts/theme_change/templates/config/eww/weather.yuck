@@ -1,0 +1,295 @@
+(defpoll getWeatherData 
+  :interval "30s"
+  `python ./scripts/weather/weather.py`)
+(defvar displayWeather "hour")
+
+
+(defwidget date []
+  (eventbox
+    :cursor "pointer"
+    :onclick "./scripts/weather/switch.sh"
+    (label
+      :text {displayWeather == "hour" ? "Current weather" : "${getWeatherData.daily[0].time}"}
+      :class "date"
+      :valign "start"
+    )
+  )
+)
+
+(defwidget icon []
+  (label
+    :text {displayWeather == "hour" ? "${getWeatherData.current.icon}" : "${getWeatherData.daily[0].icon}"}
+    :class "icon"
+  )
+)
+
+(defwidget info1 []
+  (box
+    :orientation "h"
+    :halign "center"
+    :spacing 15
+    :class "info1"
+    :valign "center"
+    :style {displayWeather == "hour" ? "" : "margin-left: 1rem;"}
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.current.temperature_2m}ºC" : "${getWeatherData.daily[0].temperature_2m_min} - ${getWeatherData.daily[0].temperature_2m_max}ºC"}
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.current.wind_speed_10m}km/h" : "${getWeatherData.daily[0].wind_speed_10m_max}km/h"}
+    )
+  )
+)
+(defwidget info2 []
+  (box
+    :orientation "h"
+    :spacing -15
+    :class "info2"
+    :halign "center"
+    :valign "center"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.current.precipitation}%" : "${getWeatherData.daily[0].precipitation_probability_max}%"}
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.current.rain}mm / ${getWeatherData.current.snowfall}cm" : "${getWeatherData.daily[0].rain_sum}mm / ${getWeatherData.daily[0].snowfall_sum}cm"}
+    )
+  )
+)
+(defwidget currentContainer []
+  (box
+    :orientation "v"
+    :valign "start"
+    :spacing 0
+    :class "current-container"
+    (date)
+    (icon)
+    (info1)
+    (info2)
+  )
+)
+
+(defwidget time0 []
+  (box
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :class "time-box"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[0].time}" : "${getWeatherData.daily[1].time}"}
+      :class "box-date"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[0].icon}" : "${getWeatherData.daily[1].icon}"}
+      :class "box-icon"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[0].temperature_2m}ºC" : "${getWeatherData.daily[1].temperature_2m_min}-${getWeatherData.daily[1].temperature_2m_max}ºC"}
+      :class "box-temp"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[0].wind_speed_10m}km/h" : "${getWeatherData.daily[1].wind_speed_10m_max}km/h"}
+      :class "box-wind"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[0].precipitation_probability}%" : "${getWeatherData.daily[1].precipitation_probability_max}%"}
+      :class "box-prec"
+    )
+  )
+)
+(defwidget time1 []
+  (box
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :class "time-box"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[1].time}" : "${getWeatherData.daily[2].time}"}
+      :class "box-date"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[1].icon}" : "${getWeatherData.daily[2].icon}"}
+      :class "box-icon"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[1].temperature_2m}ºC" : "${getWeatherData.daily[2].temperature_2m_min}-${getWeatherData.daily[2].temperature_2m_max}ºC"}
+      :class "box-temp"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[1].wind_speed_10m}km/h" : "${getWeatherData.daily[2].wind_speed_10m_max}km/h"}
+      :class "box-wind"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[1].precipitation_probability}%" : "${getWeatherData.daily[2].precipitation_probability_max}%"}
+      :class "box-prec"
+    )
+  )
+)
+(defwidget time2 []
+  (box
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :class "time-box"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[2].time}" : "${getWeatherData.daily[3].time}"}
+      :class "box-date"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[2].icon}" : "${getWeatherData.daily[3].icon}"}
+      :class "box-icon"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[2].temperature_2m}ºC" : "${getWeatherData.daily[3].temperature_2m_min}-${getWeatherData.daily[3].temperature_2m_max}ºC"}
+      :class "box-temp"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[2].wind_speed_10m}km/h" : "${getWeatherData.daily[3].wind_speed_10m_max}km/h"}
+      :class "box-wind"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[2].precipitation_probability}%" : "${getWeatherData.daily[3].precipitation_probability_max}%"}
+      :class "box-prec"
+    )
+  )
+)
+(defwidget time3 []
+  (box
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :class "time-box"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[3].time}" : "${getWeatherData.daily[4].time}"}
+      :class "box-date"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[3].icon}" : "${getWeatherData.daily[4].icon}"}
+      :class "box-icon"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[3].temperature_2m}ºC" : "${getWeatherData.daily[4].temperature_2m_min}-${getWeatherData.daily[4].temperature_2m_max}ºC"}
+      :class "box-temp"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[3].wind_speed_10m}km/h" : "${getWeatherData.daily[4].wind_speed_10m_max}km/h"}
+      :class "box-wind"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[3].precipitation_probability}%" : "${getWeatherData.daily[4].precipitation_probability_max}%"}
+      :class "box-prec"
+    )
+  )
+)
+(defwidget time4 []
+  (box
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :class "time-box"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[4].time}" : "${getWeatherData.daily[5].time}"}
+      :class "box-date"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[4].icon}" : "${getWeatherData.daily[5].icon}"}
+      :class "box-icon"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[4].temperature_2m}ºC" : "${getWeatherData.daily[5].temperature_2m_min}-${getWeatherData.daily[5].temperature_2m_max}ºC"}
+      :class "box-temp"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[4].wind_speed_10m}km/h" : "${getWeatherData.daily[5].wind_speed_10m_max}km/h"}
+      :class "box-wind"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[4].precipitation_probability}%" : "${getWeatherData.daily[5].precipitation_probability_max}%"}
+      :class "box-prec"
+    )
+  )
+)
+(defwidget time5 []
+  (box
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :class "time-box"
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[5].time}" : "${getWeatherData.daily[6].time}"}
+      :class "box-date"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[5].icon}" : "${getWeatherData.daily[6].icon}"}
+      :class "box-icon"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[5].temperature_2m}ºC" : "${getWeatherData.daily[6].temperature_2m_min}-${getWeatherData.daily[6].temperature_2m_max}ºC"}
+      :class "box-temp"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[5].wind_speed_10m}km/h" : "${getWeatherData.daily[6].wind_speed_10m_max}km/h"}
+      :class "box-wind"
+    )
+    (label
+      :text {displayWeather == "hour" ? "${getWeatherData.hourly[5].precipitation_probability}%" : "${getWeatherData.daily[6].precipitation_probability_max}%"}
+      :class "box-prec"
+    )
+  )
+)
+
+(defwidget hexaSubContainer1 []
+  (box 
+    :orientarion "h"
+    :halign "fill"
+    :spacing {displayWeather == "hour" ? 45 : 37}
+    (time0)
+    (time1)
+    (time2)
+  )
+)
+(defwidget hexaSubContainer2 []
+  (box
+    :orientation "h"
+    :halign "fill"
+    :spacing {displayWeather == "hour" ? 45 : 34}
+    (time3)
+    (time4)
+    (time5)
+  )
+)
+(defwidget hexaContainer []
+  (box
+    :orientation "v"
+    :valign "start"
+    :halign "center"
+    :class "hexa-container"
+    (hexaSubContainer1)
+    (hexaSubContainer2)
+  )
+)
+
+(defwidget weatherMainContainer []
+  (box
+    :orientation "v"
+    :spacing 0
+    :class "main-container"
+    (currentContainer)
+    (hexaContainer)
+  )
+)
+
+(defwindow weather
+  :monitor 0
+  :geometry (geometry
+    :x "565px"
+    :y "4px"
+    :width "270px"
+    :height "400px"
+    :anchor "top left"
+  )
+  :stacking "fg"
+  :reserve (struts :distance "40px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  
+  (weatherMainContainer)
+)

@@ -1,0 +1,98 @@
+
+* {
+	main-bg: #0a0a0a;
+	select-bg: #202020;
+	foreground: #b6b6b6;
+  border: #ffffff;
+}
+
+window {
+	background-color: @main-bg;
+	
+	border: 2px;
+	border-radius: 10px;
+	border-color: @foreground;
+	
+	padding: 10px;
+
+	width: 25em;
+	height: 30em;
+}
+
+
+
+mainbox {
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+
+
+inputbar {
+	text-color: @foreground;
+	background-color: transparent;
+	
+	padding: 3px;
+
+	max-width: 5em;
+}
+case-indicator {
+	enabled: false;
+}
+prompt {
+	enabled: false;
+}
+entry {
+	background-color: transparent;
+
+	font: "JetBrains Mono NerdFont bold 14";
+	text-color: @foreground;
+
+	border-radius: 5px;
+
+	margin: 0 5px;
+
+	padding: 5px 2px;
+
+	margin: 0 6em;
+}
+textbox-current-entry {
+	enabled: false;
+}
+icon-current-entry {
+	enabled: false;
+}
+
+
+
+listview {
+	background-color: transparent;
+	padding: 0.5em 0.5em;
+
+	spacing: 5px;
+}
+element {
+	background-color: transparent;
+
+	padding: 5px;
+}
+element selected{
+	background-color: @select-bg;
+
+	border-radius: 5px;
+}
+element-icon {
+	background-color: transparent;
+	margin-left: 10px;
+
+	size: 1.25em;
+}
+element-index {
+	enabled: false;
+}
+element-text {
+	background-color: transparent;
+	text-color: @foreground;
+	font: "JetBrains Mono NerdFont bold 16";
+}

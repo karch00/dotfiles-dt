@@ -1,0 +1,158 @@
+(deflisten getData "python -u ./scripts/music/getmainmetadata.py")
+
+(defwidget imageContainer []
+  (image
+    :halign "start"
+    :path "${getData.image}"
+    :image-width 196
+    :image-height 196
+  )
+)
+(defwidget progressBar []
+  (box
+    :orientation "h"
+    :spacing -120
+    :style "margin-left: -130px;"
+    (label
+      :text "${getData.progress_time}"
+      :style "font-size: 0.8rem;"
+    )
+    (scale
+      :value "${getData.progress_bar}"
+      :min 0
+      :max "${getData.length}"
+      :orientation "h"
+      :class "progress-bar"
+      :width 300
+      :onchange "sleep 1 && playerctl position {}"
+    )
+  )
+)
+(defwidget volumeContainer []
+  (box
+    :orientation "h"
+    :halign "start"
+    :spacing -20
+    :style "margin-left: -10px;"
+    (label
+      :text "${getData.volume_icon}"
+    )
+    (scale
+      :value "${getData.volume}"
+      :min 0
+      :max 100
+      :orientation "h"
+      :class "volume-bar"
+      :width 80
+      :onchange "playerctl volume $( bc -l <<< '{} / 100' )"
+    )
+  )
+)
+(defwidget playerControlsContainer []
+  (box
+    :orientation "h"
+    :halign "center"
+    :spacing 20
+    :width 170
+    :style "font-size: 1.25rem; margin-top: -2px;"
+    (eventbox
+      :onclick "playerctl previous"
+      :cursor "pointer"
+      (label :text "󰒮")
+    )
+    (eventbox
+      :onclick "playerctl play-pause"
+      :cursor "pointer"
+      (label :text "${getData.status_icon}")
+    )
+    (eventbox
+      :onclick "playerctl next"
+      :cursor "pointer"
+      (label :text "󰒭")
+    )
+    (eventbox
+      :onclick "playerctl shuffle toggle"
+      :cursor "pointer"
+      (label :text "${getData.shuffle_icon}")
+    )
+    (eventbox
+      :onclick ". ./scripts/music/togglerepeat.sh"
+      :cursor "pointer"
+      (label :text "${getData.repeat_icon}")
+    )
+  )
+)
+(defwidget controlsContainer []
+  (box
+    :orientation "h"
+    :halign "start"
+    :spacing 0
+    (volumeContainer)
+    (playerControlsContainer)
+  )
+)
+(defwidget metadataContainer []
+  (box
+    :orientation "v"
+    :valign "center"
+    :halign "center"
+    :spacing 5
+    (controlsContainer)
+    (progressBar)
+  )
+)
+(defwidget titleContainer []
+  (box
+    :orientation "v"
+    :valign "start"
+    :spacing -15
+    (label
+      :text "${getData.title}"
+      :halign "start"
+      :style "margin-top: 24px; font-size: 1.1rem; font-weight: bold;"
+      :limit-width 35
+    )
+    (label
+      :text "${getData.artist}"
+      :halign "start"
+      :style "font-size: 0.8rem;"
+      :limit-width 45
+    )
+  )
+)
+(defwidget infoContainer []
+  (box
+    :orientation "v"
+    :halign "start"
+    :spacing 65
+    (titleContainer)
+    (metadataContainer)
+  )
+)
+(defwidget mainContainer []
+  (box
+    :orientation "h"
+    :spacing -190
+    (imageContainer)
+    (infoContainer)
+  )
+)
+
+
+
+(defwindow music
+  :monitor 0
+  :geometry (geometry 
+              :x "100px"
+              :y "4px"
+              :width "634px"
+              :height "240px"
+              :anchor "top left"
+            )
+  :stacking "fg"
+  :reserve (struts :distance "40px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  
+  (mainContainer)
+)

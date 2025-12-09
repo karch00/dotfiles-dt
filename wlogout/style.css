@@ -1,0 +1,54 @@
+@import "colors.css";
+
+* {
+	background-image: none;
+	box-shadow: none;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.9);
+}
+
+button {
+    margin: 10px;
+
+    border: none;
+      border-radius: 10px;
+    
+    text-decoration-color: @foreground;
+    color: @foreground;
+    
+    background-color: @background;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+}
+
+button:focus, button:active{
+	background-color: @backgroundhl;
+	outline-style: none;
+}
+
+#lock {
+    background-image: image(url("./assets/lock.svg"));
+}
+
+#logout {
+    background-image: image(url("./assets/logout.svg"));
+}
+
+#suspend {
+    background-image: image(url("./assets/suspend.svg"));
+}
+
+#hibernate {
+    background-image: image(url("./assets/hibernate.svg"));
+}
+
+#shutdown {
+    background-image: image(url("./assets/shutdown.svg"));
+}
+
+#reboot {
+    background-image: image(url("./assets/reboot.svg"));
+}

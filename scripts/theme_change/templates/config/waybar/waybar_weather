@@ -1,0 +1,98 @@
+#! /usr/bin/python3
+
+import json
+import pathlib
+import time
+
+WEATHER_FILE = f"{pathlib.Path.home()}/.scripts/weatherfetch/weather.json"
+ICON_MAP = {
+    0: ["󰖙", "󰖔"],
+    
+    1: ["󰖙", "󰖔"],
+    2: ["󰖕", "󰼱"],
+    3: ["󰖐"],
+
+    45: ["󰖑"],
+    48: ["󰼰"],
+
+    51: ["󰼳"],
+    53: ["󰼳"],
+    55: ["󰼳"],
+
+    56: ["󰙿"],
+    57: ["󰙿"],
+
+    61: ["󰖗"],
+    63: ["󰖗"],
+    65: ["󰖖"],
+
+    66: ["󰙿"],
+    67: ["󰙿"],
+
+    71: ["󰖘"],
+    73: ["󰖘"],
+    75: ["󰼶"],
+
+    77: ["󰼶"],
+
+    80: ["󰖗"],
+    81: ["󰖗"],
+    82: ["󰖖"],
+
+    85: ["󰖘"],
+    86: ["󰼶"],
+
+    95: ["󰙾"],
+
+    96: ["󰖒"],
+    99: ["󰖒"]
+}
+
+def getJsonFile(filepath: str) -> dict:
+    """Gets the specified Json file data"""
+    with open(file=filepath, mode="r", encoding="utf-8") as f:
+        return json.load(fp=f)
+
+def getIconIndex(daily_sunrise: list, daily_sunset: list) -> int:
+    """Gets the icon index depending on if day or night
+
+    Params:
+    - daily_sunrise(list): list of daily sunrise unix timestamps
+    - daily_sunset(list): list of daily sunset unix timestamps
+
+    Returns:
+    - int: index
+    """
+    current_time = time.time()
+    sunrise = daily_sunrise[0]
+    sunset = daily_sunset[0]
+
+    if current_time > sunrise and current_time < sunset:
+        return 0
+    else:
+        return 1
+
+
+def main() -> None:
+    json_data = getJsonFile(WEATHER_FILE)
+    current = json_data["current"]
+
+    code = current["weather_code"]
+    temp = current["temperature_2m"]
+    wind = current["wind_speed_10m"]
+    precipitation = current["precipitation"]
+
+    index = getIconIndex(json_data["daily"]["sunrise"], json_data["daily"]["sunset"]) 
+    icon = ICON_MAP[code][index] if code in [0, 1, 2] else ICON_MAP[code][0]
+    text = f"{icon}  {int(temp)}ºC  {int(wind)}km/h  {int(precipitation)}%"
+
+    print(json.dumps( {"text": text, "class": "weather"} ))
+
+
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception:
+        print(json.dumps({"text": "󰼷 No weather data", "class": "weather"}))

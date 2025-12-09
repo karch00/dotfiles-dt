@@ -1,0 +1,9 @@
+:root {
+    --background_main: #0a0a0a;
+    --background_hl: #202020;
+    --foreground: #b6b6b6;
+    --cursor: #b6b6b6;
+
+    --accent: #777777;
+    --accent-active: #ffffff;
+}

@@ -1,0 +1,55 @@
+
+# ========= Border =========
+file_panel_border = "#%c15%"
+sidebar_border = "#%c15%"
+footer_border = "#%c15%"
+
+# ========= Border Active =========
+file_panel_border_active = "#%c15%"
+sidebar_border_active = "#%c15%"
+footer_border_active = "#%c15%"
+modal_border_active = "#%c15%"
+
+# ========= Background (bg) =========
+full_screen_bg = "#0a1931"
+file_panel_bg = "#0a1931"
+sidebar_bg = "#0a1931"
+footer_bg = "#0a1931"
+modal_bg = "#0a1931"
+
+# ========= Foreground (fg) =========
+full_screen_fg = "#%c0%"
+file_panel_fg = "#%c0%"
+sidebar_fg = "#%c0%"
+footer_fg = "#%c0%"
+modal_fg = "#%c0%"
+
+# ========= Special Color =========
+cursor = "#%c19%"
+correct = "#%c2%"
+error = "#%c1%"
+hint = "#%c4%"
+cancel = "#%c3%"
+
+# ========= File Panel Special Items =========
+file_panel_top_directory_icon = "#%c15%"
+file_panel_top_path = "#%c15%"
+file_panel_item_selected_fg = "#%c0%"
+file_panel_item_selected_bg = "#0a1931"
+
+# ========= Sidebar Special Items =========
+sidebar_title = "#%c0%"
+sidebar_item_selected_fg = "#%c0%"
+sidebar_item_selected_bg = "#0a1931"
+sidebar_divider = "#%c0%"
+
+# ========= Modal Special Items =========
+modal_cancel_fg = "#%c0%"
+modal_cancel_bg = "#0a1931"
+
+modal_confirm_fg = "#%c0%"
+modal_confirm_bg = "#0a1931"
+
+# ========= Help Menu =========
+help_menu_hotkey = "#%c15%"
+help_menu_title = "#%c0%"

@@ -1,0 +1,106 @@
+
+* {
+	main-bg: #%c0%;
+	select-bg: #%c22%;
+	foreground: #%c7%;
+  border1: transparent;
+  border2: transparent;
+}
+
+window {
+	background-color: @main-bg;
+	
+	border: 2px;
+	border-radius: 0px;
+	border-color: @foreground;
+	
+	padding: 10px;
+
+	width: 25em;
+	height: 15em;
+}
+
+
+
+mainbox {
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+
+
+inputbar {
+	text-color: @foreground;
+	background-color: transparent;
+	
+	padding: 3px;
+
+	max-width: 5em;
+}
+case-indicator {
+	enabled: false;
+}
+prompt {
+	enabled: false;
+}
+entry {
+	background-color: transparent;
+
+	font: "JetBrains Mono NerdFont bold 14";
+	text-color: @foreground;
+
+	border: 3px;
+	border-color: @border2;
+	border-radius: 5px;
+
+	margin: 0 5px;
+
+	padding: 5px 2px;
+
+	margin: 0 6em;
+}
+textbox-current-entry {
+	enabled: false;
+}
+icon-current-entry {
+	enabled: false;
+}
+
+
+
+listview {
+	background-color: transparent;
+	padding: 0.5em 2em;
+
+	spacing: 5px;
+}
+element {
+	background-color: transparent;
+
+	padding: 5px;
+}
+element selected{
+	background-color: @select-bg;
+
+	border: 3px;
+	border-color: @border2;
+	border-radius: 5px;
+}
+element-icon {
+	background-color: transparent;
+	margin-left: 10px;
+
+	size: 1.25em;
+}
+element-index {
+	enabled: false;
+}
+element-text {
+	background-color: transparent;
+	text-color: @foreground;
+	font: "JetBrains Mono NerdFont bold 16";
+}
+element-text.active {
+	background-color: #ff0000;
+}

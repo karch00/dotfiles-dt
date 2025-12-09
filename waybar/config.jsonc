@@ -1,0 +1,111 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", 
+    "position": "top", 
+    "height": 0, 
+    "width": 1845,
+    "spacing": 0, 
+    
+    // Module Order
+    "modules-left": [
+	    "hyprland/workspaces",
+	    "custom/media",
+	    "custom/weather"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+	    "network",
+	    "pulseaudio",
+	    "cpu",
+	    "memory",
+	    "battery",
+      "clock"
+    ],
+    
+    // Modules left
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1" : "",
+            "2" : "",
+            "3" : "",
+            "4" : "",
+            "5" : "",
+            "6" : ""
+        },
+        "persistent-workspaces": {
+            "1" : [],
+            "2" : [],
+            "3" : [],
+            "4" : [],
+            "5" : [],
+            "6" : []
+        }
+    },
+    "custom/media": {
+        "format": "{text}",
+        "return-type": "json",
+        "escape": false,
+        "interval": 2,
+        "on-click": "open_widget music",
+        "exec": "$HOME/.config/waybar/waybar_mediaplayer 2> /dev/null"
+    },
+    "custom/weather" : {
+	    "format": "{text}",
+	    "return-type" : "json",
+	    "escape": "false",
+	    "interval": 120,
+	    "exec" : "$HOME/.config/waybar/waybar_weather 2> /dev/null",
+	    "on-click": "open_widget weather"
+    },
+    
+    /* Modules center */
+    "clock" : {
+      "tooltip" : false,
+      "format" : "[{:%H:%M}]",
+      "interval" : 1
+    },
+    
+    /* Modules right */
+    "network" : {
+        "tooltip": false,
+        "format-wifi": "  {ipaddr}",
+        "format-ethernet" : "  {ipaddr}",
+        "format-disconnected" : "󱘖  No internet"
+    },
+    "pulseaudio": {
+        "tooltip": false,
+        "scroll-step": 1,
+        "format": "{icon}  {volume}%",
+        "format-muted": "  0%",
+        "format-icons": {
+	        "default": ["", "", ""]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+    "cpu" : {
+        "tooltip": false,
+        "format" : "  {usage:2}%",
+        "interval": 10
+    },
+    "memory" : {
+        "tooltip": false,
+        "format": "  {}%"
+    },
+    "battery" : {
+        "tooltip": false,
+        "states": {
+            "warning": 30,
+            "critical": 10
+        },
+        "format": "{icon}  {capacity}%",
+        "format-full": "{icon}  {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    }
+}

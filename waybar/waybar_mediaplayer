@@ -1,0 +1,53 @@
+#! /usr/bin/python3
+
+import json
+import subprocess
+import os
+
+# Get only first artist
+def get_first_artist(artists : str):
+    return artists.split(",")[0]
+
+# Truncate text to fit
+def truncate_text(text : str, max_length : int):
+    forbidden = "\"\\'¡¿=([{^´*+-/@#%$&|ºª-_.:,;<> "
+
+    if len(text) > max_length:
+        selection = text[0:max_length-3]
+        if selection[-1] in forbidden:
+            toreturn = selection[:-1] + "..."
+        else:
+            toreturn = selection + "..."
+    else:
+        toreturn = text
+    return toreturn 
+
+NO_MUSIC = "  No music currently playing"
+def main():
+    # Get valid browser player
+    players = subprocess.check_output(["playerctl", "--list-all"], text=True).strip().split()
+    player = players[0] if len(players) >= 1 else None
+    if not player or player == [""]:
+        return {"text": NO_MUSIC, "class": "media"}
+
+    # Process artist and title formatting
+    artist = subprocess.check_output(["playerctl", "--player="+player, "metadata", "artist"], text=True).strip()
+    title = subprocess.check_output(["playerctl", "--player="+player, "metadata", "title"], text=True).strip()
+    
+    if artist in title:
+        title.replace(artist, "")
+
+    artist = truncate_text(get_first_artist(artist), 12)
+    title = truncate_text(title, 28)
+
+    # Format message
+    text = f"  {artist} - {title}"
+    
+    return {"text": text, "class": "media"}
+
+if __name__ == "__main__":
+    try:
+        info = main()
+        print(json.dumps(info))
+    except Exception as e:
+        print(json.dumps({"text": NO_MUSIC, "class": "media"}))

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+HOSTS_URL="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
+HOSTS_PATH="/etc/hosts"
+
+curl $HOSTS_URL > $HOSTS_PATH
