@@ -26,7 +26,6 @@ body {
     align-items: center;
 
     overflow:hidden;
-    overflow-x: scroll;
     
     background: var(--background);
 }
@@ -75,10 +74,10 @@ main {
 }
 #searchbox-container:focus-within,
 #searchbox-container:hover{
-    border: var(--color3) solid 1px;
+    border: var(--accent) solid 1px;
 
     button {
-        border-right: var(--color3) solid 1px;
+        border-right: var(--accent) solid 1px;
     }
 }
 #searchbox-button {
@@ -178,7 +177,7 @@ main {
 }
 .pinned-section:hover,
 .pinned-section:focus-within {
-    border: var(--color3) solid 1px;
+    border: var(--accent) solid 1px;
 }
 .pinned-section h1 i  {
     font-size: 1.75rem;
@@ -204,5 +203,5 @@ main {
     outline: none;
 
     transform: scale(1.05);
-    color: var(--color3);
+    color: var(--accent);
 }
