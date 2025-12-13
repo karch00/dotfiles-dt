@@ -1,0 +1,12 @@
+@use "../colors";
+
+.taskbar {
+  background: none;
+}
+
+.taskbar-container {
+  background: colors.$background;
+  border: 2px solid green;
+
+  padding: 4px;  
+}
