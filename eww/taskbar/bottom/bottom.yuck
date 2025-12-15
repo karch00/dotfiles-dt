@@ -1,0 +1,12 @@
+(defwidget bottom-container []
+  (box
+    :orientation "v"
+    :width 100
+    :height 300
+    :valign "end"
+    :halign "center"
+    :spacing 0                  ; Tinker depending on modules added/removed
+    :class "bottom-container"
+    
+  )
+)

@@ -1,0 +1,13 @@
+@use "../../colors.scss";
+
+.center-container {
+  background: none;
+}
+
+.workspaces-container {
+  color: colors.$active;
+}
+.workspace-icon{
+  color: colors.$active;
+  font-size: 20px;
+}

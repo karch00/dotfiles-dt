@@ -1,0 +1,88 @@
+;;; WORKSPACES CONTAINER ;;;
+(deflisten active-workspaces
+  :initial `hyprctl monitors -j | jq '[ .[] | .activeWorkspace.id]'`
+  `./scripts/updateworkspaces.sh`
+)
+(defwidget workspace [id]
+  (label
+    :text {id == active-workspaces[0] || id == active-workspaces[1] ? "◆" : "◇"}
+    :class "workspace-icon"
+  )
+)
+(defwidget workspace-app [id icon]
+  (image
+    :path icon
+    :fill-svg {id == active-workspaces[0] || id == active-workspaces[1] ? active-color : inactive-color}
+    :image-width 18
+  )
+)
+
+(defwidget hdmi-workspaces []
+  (box
+    :orientation "v"
+    :width 30
+    :valign "center"
+    :halign "center"
+    :spacing 0
+
+    (for id in "[11,12,13,14,15,16,17,18]"
+      (workspace :id "${id}")
+    )
+  )
+)
+(defwidget dp-workspaces []
+  (box
+    :orientation "v"
+    :width 30
+    :valign "center"
+    :halign "center"
+    :spacing 0 
+
+    (for id in "[1,2]"
+      (workspace :id "${id}")
+    )
+  )
+)
+(defwidget app-workspaces []
+  (box
+    :orientation "v"
+    :width 30
+    :valign "center"
+    :halign "center"
+    :spacing 3 
+
+    (workspace-app :id 21 :icon "./assets/taskbar/discord.svg")
+    (workspace-app :id 22 :icon "./assets/taskbar/spotify.svg")
+  )
+)
+(defwidget workspaces-container []
+  (box
+    :orientation "h"
+    :width 100
+    :valign "center"
+    :halign "center"
+    :spacing -10 
+    :class "workspaces-container"
+
+    (hdmi-workspaces)
+    (dp-workspaces)
+    (app-workspaces)
+  )
+)
+
+
+
+;;; MAIN CENTER CONTAINER ;;;
+(defwidget center-container []
+  (box
+    :orientation "v"
+    :width 100
+    :height 300
+    :valign "center"
+    :halign "center"
+    :spacing 0                ; Tinker depending on modules added/removed 
+    :class "center-container"
+
+    (workspaces-container)
+  )
+)

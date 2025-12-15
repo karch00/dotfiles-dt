@@ -1,0 +1,27 @@
+@use "../../colors.scss";
+
+.top-container {
+  background: none;
+}
+
+/* DATE/TIME */
+.date-container {
+  background: none;
+  color: colors.$active;
+}
+
+.clock {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.date {
+  font-size: 13px;
+  margin-top: -10px;
+}
+
+/* STATS */
+.stats-container {
+  color: colors.$active;
+}
+

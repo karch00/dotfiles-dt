@@ -1,4 +1,7 @@
 @use "../colors";
+@import "./top/top.scss";
+@import "./center/center.scss";
+@import "./bottom/bottom.scss";
 
 .taskbar {
   background: none;
@@ -6,7 +9,9 @@
 
 .taskbar-container {
   background: colors.$background;
-  border: 2px solid green;
 
-  padding: 4px;  
+  border: 2px solid colors.$active;
+  border-radius: 10px;
+
+  padding: 5px 0;
 }

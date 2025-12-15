@@ -1,1 +1,2 @@
+(include "./colors.yuck")
 (include "./taskbar/taskbar.yuck")

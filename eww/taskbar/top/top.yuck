@@ -1,0 +1,140 @@
+;;; TIME/DATE WIDGET ;;;
+(defwidget clock []
+  (label
+    :text "${formattime(EWW_TIME, '%H:%M', 'Europe/Paris')}"
+    :class "clock"
+  )
+)
+(defwidget weekday []
+  (label
+    :text "${formattime(EWW_TIME, '%a', 'Europe/Paris')}"
+    :class "weekday"
+  )
+)
+(defwidget date []
+  (label
+    :text "${formattime(EWW_TIME, '%d/%m/%y', 'Europe/Paris')}"
+    :class "date"
+  )
+)
+
+(defwidget date-container []
+  (box
+    :orientation "v"
+    :width 100
+    :valign "start"
+    :halign "center"
+    :spacing -5
+    :class "date-container"
+    
+    (clock)
+    (weekday)
+    (date)
+  )
+)
+
+
+
+;;; STATS WIDGET ;;;
+(defwidget cpu []
+  (box
+    :orientation "h"
+    :width 100
+    :valign "start"
+    :spacing -25
+    
+    (label
+      :text "${floor(EWW_CPU['avg']) < 10 ? '0${floor(EWW_CPU['avg'])}' : floor(EWW_CPU['avg'])}%"
+    )
+    (image
+      :path "./assets/taskbar/cpu.svg"
+      :fill-svg active-color
+      :image-width 18
+    )
+  )
+)
+(defwidget ram []
+  (box
+    :orientation "h"
+    :width 100
+    :valign "start"
+    :spacing -25
+    
+    (label
+      :text "${floor(EWW_RAM['used_mem_perc']) < 10 ? '0${floor(EWW_RAM['used_mem_perc'])}' : floor(EWW_RAM['used_mem_perc'])}%"
+    )
+    (image
+      :path "./assets/taskbar/ram.svg"
+      :fill-svg active-color
+      :image-width 22
+    )
+  )
+)
+(defwidget network-up []
+  (box
+    :orientation "h"
+    :width 100
+    :valign "start"
+    :spacing -25
+    
+    (label
+      :text "${formatbytes(floor(EWW_NET['enp7s0']['NET_UP']), true)}"
+    )
+    (image
+      :path "./assets/taskbar/arrow_up.svg"
+      :fill-svg active-color
+      :image-width 22
+    )
+  )
+)
+(defwidget network-down []
+  (box
+    :orientation "h"
+    :width 100
+    :valign "start"
+    :spacing -25
+    
+    (label
+      :text "${formatbytes(floor(EWW_NET['enp7s0']['NET_DOWN']), true)}"
+    )
+    (image
+      :path "./assets/taskbar/arrow_down.svg"
+      :fill-svg active-color
+      :image-width 22
+    )
+  )
+)
+
+(defwidget stats-container []
+  (box
+    :orientation "v"
+    :width 100
+    :valign "start"
+    :halign "center"
+    :spacing 0
+    :class "stats-container" 
+
+    (cpu)
+    (ram)
+    (network-up)
+    (network-down)
+  )
+)
+
+
+
+;;; MAIN TOP CONTAINER ;;;
+(defwidget top-container []
+  (box
+    :orientation "v"
+    :width 100
+    :height 300
+    :valign "start"
+    :halign "center"
+    :spacing -120           ; Tinker depending on modules added/removed
+    :class "top-container"
+    
+    (date-container)
+    (stats-container)
+  )
+)

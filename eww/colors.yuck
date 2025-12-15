@@ -1,0 +1,5 @@
+(defvar background-color "#0a0a0a")
+(defvar background-hl-color "#202020")
+(defvar foreground-color "#b6b6b6")
+(defvar active-color "#ffffff")
+(defvar inactive-color "#777777")
